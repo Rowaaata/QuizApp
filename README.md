@@ -1,4 +1,4 @@
-# untitled36
+# QuizApp
 
 A new Flutter project.
 
