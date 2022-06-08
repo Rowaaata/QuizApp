@@ -25,7 +25,11 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _questionindex = 0;
       _totalScore=0;
+      print("Done");
+      print(_totalScore);
     });
+
+
   }
 
   void answerQuestion(int score) {
@@ -91,6 +95,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Container(
           color: isSwitched ==false? Colors.white:Colors.black,
+
             child: _questionindex < _question.length
                 ? Quiz(_question, _questionindex, answerQuestion)
                 : Result(reset,_totalScore)),

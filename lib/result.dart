@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+
 class Result extends StatelessWidget {
   final Function() q;
   final int resultScore;
 
-  Result(this.q,this.resultScore);
+  Result(this.q, this.resultScore);
 
-  String get resultPhrase{
+  String get resultPhrase {
     String resultText;
-    if(resultScore>=70){
-      resultText="You are awesome !";
-
-    }else if (resultScore>=40){
-      resultText="Pretty likable!";
-    }else{
-      resultText="You are so bad!";
+    if (resultScore >= 70) {
+      resultText = "You are awesome !";
+    } else if (resultScore >= 40) {
+      resultText = "Pretty likable!";
+    } else {
+      resultText = "You are so bad!";
     }
     return resultText;
-
   }
 
   @override
@@ -25,9 +24,27 @@ class Result extends StatelessWidget {
     return Center(
       child: Column(
         children: [
+
           Text(
-           resultPhrase,
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: isSwitched ==false?Colors.black:Colors.white),
+            "Done!",
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: isSwitched == false ? Colors.black : Colors.white),
+          ),
+          Text(
+           'TotalScore= $resultScore',
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: isSwitched == false ? Colors.black : Colors.white),
+          ),
+          Text(
+            resultPhrase,
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: isSwitched == false ? Colors.black : Colors.white),
           ),
           TextButton(
               onPressed: q,
