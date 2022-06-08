@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:untitled36/quiz.dart';
 import 'package:untitled36/result.dart';
-import 'question.dart';
-import 'answer.dart';
+
+
 
 void main() {
   runApp(const MyApp());
@@ -15,38 +15,85 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+bool isSwitched=false;
+
 class _MyAppState extends State<MyApp> {
   int _questionindex = 0;
-  void answerQuestion(){
+  int _totalScore=0;
+
+  void reset() {
     setState(() {
-      _questionindex+=1;
+      _questionindex = 0;
+      _totalScore=0;
     });
-    print(_questionindex);
-    print("Answer chosen!");
   }
 
-  final _question = [
-    'What\' your favorite color?',
-    'What\' your favorite animal?',
+  void answerQuestion(int score) {
+
+    setState(() {
+      _questionindex += 1;
+      _totalScore +=score;
+
+    });
+    print(_questionindex);
+    print(_totalScore);
+
+  }
+
+  final List<Map<String, Object>> _question = [
+    {
+      'question text': 'What\' your favorite color?',
+      'answers': [
+        {'text': 'Blue', 'score': 10},
+        {'text': 'Black', 'score': 20},
+        {'text': 'Red', 'score': 30},
+        {'text': 'Orange', 'score': 40},
+      ],
+    },
+    {
+      'question text': 'What\' your favorite animal?',
+      'answers': [
+        {'text': 'Tiger', 'score': 10},
+        {'text': 'Rabbit', 'score': 20},
+        {'text': 'Lion', 'score': 30},
+        {'text': 'Cow', 'score': 40},
+      ],
+    },
+    {
+      'question text': 'What \' your favourite fruit?',
+      'answers': [
+        {'text': 'Orange', 'score': 10},
+        {'text': 'Apple', 'score': 20},
+        {'text': 'Banana', 'score': 30},
+        {'text': 'Mango', 'score': 40},
+      ],
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp(debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.purple),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Quiz App"),
+
+          title: Text("Quiz App",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: isSwitched == false? Colors.white:Colors.black),),
+          actions: [
+            Switch(value: isSwitched, onChanged:(value){
+              setState(() {
+                isSwitched=value;
+              });
+
+
+            },activeColor: Colors.white,inactiveThumbColor: Colors.black,inactiveTrackColor: Colors.black,)
+          ],
+
         ),
         body: Container(
-          child: Column(
-            children: [
-              Question(_question[0]),
-             Answer(answerQuestion, "Answer 1"),
-              Answer(answerQuestion, "Answer 2"),
-              Answer(answerQuestion, "Answer 3"),
-            ],
-          ),
-        ),
+          color: isSwitched ==false? Colors.white:Colors.black,
+            child: _questionindex < _question.length
+                ? Quiz(_question, _questionindex, answerQuestion)
+                : Result(reset,_totalScore)),
       ),
     );
   }
