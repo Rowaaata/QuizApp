@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:untitled36/main.dart';
+
 import 'main.dart';
 
 class Question extends StatelessWidget {
